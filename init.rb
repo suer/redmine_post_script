@@ -1,9 +1,8 @@
 require 'redmine'
 
 require 'post_script_patch'
-require 'dispatcher'
 
-Dispatcher.to_prepare :redmine_post_script do
+Rails.configuration.to_prepare do
   Redmine::Activity.default_event_types.each do |event|
     Redmine::Activity.providers[event].each do |clazz|
       clazz.constantize.send(:include, PostScriptPatch)
