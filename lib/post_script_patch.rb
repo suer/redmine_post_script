@@ -1,9 +1,10 @@
 module PostScriptPatch
   class PostScriptExecuter
-    def execute
+    def execute(&f)
       Thread.start {
-        yield
-      }.join
+        sleep 10
+        f.call
+      }
     end 
   end
   
